@@ -1,0 +1,23 @@
+{
+  "name": "adiafora/php-api-client",
+  "description": "Packet to send to an Api using PHP.",
+  "keywords": ["api", "api client", "php", "http client"],
+  "type": "package",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sergey Zhidkov",
+      "email": "zhidkoff@list.ru"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "ext-curl": "*",
+  },
+  "autoload": {
+    "classmap": [],
+    "psr-4": {
+      "Adiafora\\ApiClient\\": "src"
+    }
+  }
+}

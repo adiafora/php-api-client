@@ -12,7 +12,7 @@ class PostContext extends AbstractContext
     public function curlSetoptMethod($curl)
     {
         curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($this->api->getParams(), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($this->api->getParams()));
     }
 
     public function getUrlForSend()

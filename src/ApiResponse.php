@@ -8,13 +8,13 @@ namespace Adiafora\ApiClient;
  */
 class ApiResponse
 {
-    private $code;
+    private $curl;
 
     private $response;
 
     public function __construct($curl, $response)
     {
-        $this->code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        $this->curl = $curl;
         $this->response = json_decode($response, true);
     }
 
@@ -25,7 +25,7 @@ class ApiResponse
      */
     public function code()
     {
-        return $this->code;
+        return curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
     }
 
     /**
@@ -36,5 +36,21 @@ class ApiResponse
     public function response()
     {
         return $this->response;
+    }
+
+    /**
+     * @return string
+     */
+    public function error()
+    {
+        return curl_error($this->curl);
+    }
+
+    /**
+     * @return int
+     */
+    public function errno()
+    {
+        return curl_errno($this->curl);
     }
 }

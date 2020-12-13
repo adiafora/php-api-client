@@ -48,11 +48,15 @@ To make a request to the API, call the `send()` method:
  $response = $api->send();
 ```
 
-The method returns an object of class `Adiafora\ApiClient\ApiResponse` that contains 2 methods: 
+The method returns an object of class `Adiafora\ApiClient\ApiResponse` that contains these methods: 
 
 `code()` - return code of response 
 
 `response()` - return response from the API.
+
+`error()` - return curl_error() for the curl.
+
+`errno()` - return curl_errno() for the curl.
 
 Real example
 ----------------------------------

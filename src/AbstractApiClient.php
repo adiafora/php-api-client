@@ -45,8 +45,8 @@ abstract class AbstractApiClient
      */
     public function __construct(string $method = Method::GET, array $params = [])
     {
-        $this->params = $params;
-        $this->method = trim(strtoupper($method));
+        $this->params  = $params;
+        $this->method  = trim(strtoupper($method));
         $this->context = $this->getContext();
 
         if (defined('SET_CURLOPT_CONNECTTIMEOUT') === false) {
@@ -81,8 +81,8 @@ abstract class AbstractApiClient
     public function send(): ApiResponse
     {
         $urlForSend = $this->context->getUrlForSend();
-        $params = $this->getParams();
-        $headers = $this->getHeaders();
+        $params     = $this->getParams();
+        $headers    = $this->getHeaders();
 
         try {
             $curl = curl_init();
@@ -130,7 +130,7 @@ abstract class AbstractApiClient
      * @return AbstractContext
      * @throws \Exception
      */
-    private function getContext(): AbstractContext
+    protected function getContext(): AbstractContext
     {
         switch ($this->method) {
             case Method::GET:

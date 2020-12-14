@@ -140,7 +140,7 @@ abstract class AbstractApiClient
                 $classContext = new PostContext($this);
                 break;
             default:
-                throw new NotFoundMethodApiException('Not found AbstractContext class for method ' . $method);
+                throw new NotFoundMethodApiException('Not found AbstractContext class for method ' . $this->method);
         }
 
         return $classContext;

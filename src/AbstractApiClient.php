@@ -97,7 +97,7 @@ abstract class AbstractApiClient
 
             $response = curl_exec($curl);
 
-            $apiResponse = new ApiResponse($curl, $response);
+            $apiResponse = new ApiResponse($curl, $response, $this);
 
             curl_close($curl);
 

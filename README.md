@@ -58,6 +58,12 @@ The method returns an object of class `Adiafora\ApiClient\ApiResponse` that cont
 
 `errno()` - return curl_errno() for the curl.
 
+`requestParameters()` - return parameters of request.
+
+`requestUrl()` - return url of request.
+
+`requestHeaders()` - return headers of request.
+
 Real example
 ----------------------------------
 

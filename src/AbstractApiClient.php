@@ -102,7 +102,7 @@ abstract class AbstractApiClient
             curl_close($curl);
 
         } catch (\Exception $exception) {
-            throw new NotConnectApiClientException($urlForSend, $params, $headers, $exception->getMessage());
+            throw new NotConnectApiClientException($this->getUrl(), $params, $headers, $exception->getMessage());
         }
 
         return $apiResponse;
@@ -125,6 +125,19 @@ abstract class AbstractApiClient
     }
 
     /**
+     * Here you define an array of classes for each method of sending data.
+     *
+     * @return array
+     */
+    protected function contexts()
+    {
+        return [
+            Method::GET  => GetContext::class,
+            Method::POST => PostContext::class,
+        ];
+    }
+
+    /**
      * Depending on the request method, the request context will be formed differently.
      *
      * @return AbstractContext
@@ -132,17 +145,12 @@ abstract class AbstractApiClient
      */
     protected function getContext(): AbstractContext
     {
-        switch ($this->method) {
-            case Method::GET:
-                $classContext = new GetContext($this);
-                break;
-            case Method::POST:
-                $classContext = new PostContext($this);
-                break;
-            default:
-                throw new NotFoundMethodApiException('Not found AbstractContext class for method ' . $this->method);
+        try {
+            $classContext = $this->contexts()[$this->method];
+        } catch (\Exception $exception) {
+            throw new NotFoundMethodApiException($this->getUrl(), $this->getParams(), $this->getHeaders(), 'Not found AbstractContext class for method ' . $this->method);
         }
 
-        return $classContext;
+        return new $classContext($this);
     }
 }

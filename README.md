@@ -64,6 +64,8 @@ The method returns an object of class `Adiafora\ApiClient\ApiResponse` that cont
 
 `requestHeaders()` - return headers of request.
 
+`totalTime()` - return total transaction time in seconds for last transfer.
+
 Real example
 ----------------------------------
 

@@ -36,6 +36,13 @@ abstract class AbstractApiClient
     protected $context;
 
     /**
+     * Name of the file, if requested.
+     *
+     * @var null|string
+     */
+    protected $fileName = null;
+
+    /**
      * AbstractApiClient constructor.
      *
      * @param string $method
@@ -73,6 +80,23 @@ abstract class AbstractApiClient
     abstract public function getUrl(): string;
 
     /**
+     * If the API shall to return a file,
+     * then you need to pass the full path to the file,
+     * including the name of the file,
+     * where it will be saved.
+     *
+     * @param string $fileName
+     *
+     * @return $this
+     */
+    public function file(string $fileName)
+    {
+        $this->fileName = $fileName;
+
+        return $this;
+    }
+
+    /**
      * Main method for executing an API request.
      *
      * @return ApiResponse
@@ -96,6 +120,11 @@ abstract class AbstractApiClient
             $this->context->curlSetoptMethod($curl);
 
             $response = curl_exec($curl);
+
+            if (! is_null($this->fileName)) {
+                file_put_contents($this->fileName, $response);
+                $response = json_encode($this->fileName);
+            }
 
             $apiResponse = new ApiResponse($curl, $response, $this);
 
@@ -129,7 +158,7 @@ abstract class AbstractApiClient
      *
      * @return array
      */
-    protected function contexts()
+    protected function contexts(): array
     {
         return [
             Method::GET  => GetContext::class,

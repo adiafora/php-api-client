@@ -50,9 +50,11 @@ To make a request to the API, call the `send()` method:
 
 The method returns an object of class `Adiafora\ApiClient\ApiResponse` that contains these methods: 
 
-`code()` - return code of response 
+`code()` - return code of response.
 
-`response()` - return response from the API.
+`response()` - return response from the API decoded using json_decode(). Because most APIs return a response in json format. If you want to get the answer as it is, then use the dirty() method.
+
+`dirty()` - return the answer as it is without transformations.
 
 `error()` - return curl_error() for the curl.
 

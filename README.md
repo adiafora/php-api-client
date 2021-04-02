@@ -68,20 +68,6 @@ The method returns an object of class `Adiafora\ApiClient\ApiResponse` that cont
 
 `totalTime()` - return total transaction time in seconds for last transfer.
 
-The API returns a file
-----------------------------------
-
-If the API shall to return a file, call the file() method with a single argument - an absolute path that includes the name of the file where you want to save the resulting file. And then call the send() method. In this case, the Response::response() Api class method will return the full name of the received file.
-
-```php
- $api = new MyApiClient();
-
- $response = $api->file(__DIR__ . '/invoice/file.csv')
-               ->send();
- 
- echo $response->response(); // '/app/www/invoice/file.csv'
-```
-
 
 Real example
 ----------------------------------

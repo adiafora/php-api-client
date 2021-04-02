@@ -16,6 +16,8 @@ class ApiResponse
 
     private $response;
 
+    private $dirty;
+
     private $requestHeaders;
 
     private $requestUrl;
@@ -31,11 +33,22 @@ class ApiResponse
         $this->error             = curl_error($curl);
         $this->errno             = curl_errno($curl);
         $this->response          = json_decode($response, true);
+        $this->dirty             = $response;
         $this->requestHeaders    = $api->getHeaders();
         $this->requestUrl        = $api->getUrl();
         $this->requestParameters = $api->getParams();
     }
 
+    /**
+     * Return the response as it is.
+     *
+     * @return string
+     */
+    public function dirty()
+    {
+        return $this->dirty;
+    }
+    
     /**
      * Return total transaction time in seconds for last transfer.
      *

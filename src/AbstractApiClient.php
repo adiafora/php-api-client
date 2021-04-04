@@ -2,6 +2,7 @@
 
 namespace Adiafora\ApiClient;
 
+use Adiafora\ApiClient\Exceptions\ApiClientException;
 use Adiafora\ApiClient\Exceptions\NotConnectApiClientException;
 use Adiafora\ApiClient\Exceptions\NotFoundMethodApiException;
 use Adiafora\ApiClient\Contexts\AbstractContext;
@@ -41,7 +42,7 @@ abstract class AbstractApiClient
      * @param string $method
      * @param array  $params
      *
-     * @throws NotFoundMethodApiException
+     * @throws ApiClientException
      */
     public function __construct(string $method = Method::GET, array $params = [])
     {
@@ -76,7 +77,7 @@ abstract class AbstractApiClient
      * Main method for executing an API request.
      *
      * @return ApiResponse
-     * @throws NotConnectApiClientException
+     * @throws ApiClientException
      */
     public function send(): ApiResponse
     {
@@ -141,7 +142,7 @@ abstract class AbstractApiClient
      * Depending on the request method, the request context will be formed differently.
      *
      * @return AbstractContext
-     * @throws NotFoundMethodApiException
+     * @throws ApiClientException
      */
     protected function getContext(): AbstractContext
     {
